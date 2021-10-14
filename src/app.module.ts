@@ -4,12 +4,15 @@ import { AppService } from './app.service';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ListModule } from './list/list.module';
 import { ColorModule } from './color/color.module';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
-    MongooseModule.forRoot(
-      'mongodb+srv://admin:passwordpassword@track-app.tdie6.mongodb.net/readDo?retryWrites=true&w=majority',
-    ),
+    ConfigModule.forRoot({
+      isGlobal: true,
+      envFilePath: ['.env.development', '.env'],
+    }),
+    MongooseModule.forRoot(process.env.MONGO_URI),
     ListModule,
     ColorModule,
   ],

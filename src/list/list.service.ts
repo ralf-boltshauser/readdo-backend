@@ -13,6 +13,7 @@ export class ListService {
   ) {}
 
   findAll() {
+    console.log(process.env.MONGO_URI);
     return this.listModel.find().exec();
   }
 
